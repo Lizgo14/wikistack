@@ -5,6 +5,7 @@ const db = new Sequelize('postgres://localhost:5432/wikistack',{
   logging: false
 });
 
+
 const Page = db.define('page', {
   title: {
     type: Sequelize.STRING, allowNull: false
@@ -20,8 +21,15 @@ const Page = db.define('page', {
   }
 });
 
+Page.beforeValidate((pageInstance) => {
+
+    if (pageInstance.slug === undefined){
+      pageInstance.slug = pageInstance.title.replace(/\s+/g, '_').replace(/\W/g, "");
+    }
+})
+
 const User = db.define('user', {
-  name: {
+  name: { 
     type: Sequelize.STRING, allowNull: false
   },
   email: {
@@ -35,5 +43,5 @@ const User = db.define('user', {
 //module.exports = { Page, User };
 
 module.exports = {
-  db
+  db, Page, User
 }
