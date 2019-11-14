@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const { db } = require('./models');
 const app = express();
 const models = require('./models');
-//const style = require("./stylesheets/style")
+const layout = require("./views/layout")
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(morgan('dev'))
@@ -15,7 +15,7 @@ then(() => {
 })
 
 app.get('/', (req,res,next)=>{
-  res.send("")
+  res.send(layout(""))
 })
 
 const init =async () => {
