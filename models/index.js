@@ -21,11 +21,11 @@ const Page = db.define('page', {
   }
 });
 
-Page.beforeValidate((pageInstance) => {
+Page.beforeValidate((postInstance) => {
 
-    if (pageInstance.slug === undefined){
-      pageInstance.slug = pageInstance.title.replace(/\s+/g, '_').replace(/\W/g, "");
-    }
+    //if (Page.slug === undefined){
+      postInstance.slug = postInstance.title.replace(/\s+/g, '_').replace(/\W/g, '');
+    //}
 })
 
 const User = db.define('user', {
